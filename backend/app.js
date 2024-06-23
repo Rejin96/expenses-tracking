@@ -1,13 +1,27 @@
 const express = require("express");
+const mongoose = require("mongoose");
+
+const expenseRouter = require("./routes/expenseRouter");
 
 const app = express();
+app.use(express.json());
 
-//define a route handler
+mongoose
+ .connect("mongodb://127.0.0.1:27017/expensedb")
+ .then(()=>{
+    console.log("Connected to DataBase");
+ })
+ .catch((err) => {
+    console.log(err.message);
+ });
+
 app.get("/",(req,res) => {
-    res.send("this is the new product");
-})
+    res.send("this is the new project");
+});
 
-//start the server and listen on port 3000
-app.listen(3000,() => {
-    console.log("The server is up and running");
+app.use("/api/expenses",expenseRouter);
+
+//defining port address
+app.listen(3000,() =>{
+    console.log("Server is up and running");
 });
