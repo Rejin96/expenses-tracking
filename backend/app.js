@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const expenseRouter = require("./routes/expenseRouter");
+const userRouter = require("./routes/userRouter");
 
 const app = express();
 app.use(express.json());
@@ -20,6 +21,7 @@ app.get("/",(req,res) => {
 });
 
 app.use("/api/expenses",expenseRouter);
+app.use("/api/user",userRouter);
 
 //defining port address
 app.listen(3000,() =>{
